@@ -11,7 +11,7 @@ export class Letter {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ type: 'varchar', length: 100 })
+  @Column({ type: 'varchar', length: 50 })
   title: string;
 
   @Column({ type: 'varchar' })
@@ -20,8 +20,8 @@ export class Letter {
   @Column()
   openAt: Date;
 
-  @Column()
-  openedAt: Date;
+  @Column({ nullable: true })
+  openedAt: Date | null;
 
   @Column({ type: 'boolean', default: false })
   isOpen: boolean;

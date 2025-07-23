@@ -1,5 +1,15 @@
-import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { LetterService } from './letter.service';
+import { CreateLetterDto } from './dtos/createLetter.dto';
+import { UpdateLetterDto } from './dtos/updateLetter.dto';
 
 @Controller('letter')
 export class LetterController {
@@ -15,12 +25,17 @@ export class LetterController {
   }
 
   @Post()
-  createLetter() {
-    return this.letterService.createLetter();
+  createLetter(@Body() body: CreateLetterDto) {
+    return this.letterService.createLetter(body);
   }
 
   @Patch(':id')
-  updateLetter(@Param('id') id: string, @Body() updateBody: { field: string }) {
+  updateLetter(@Param('id') id: string, @Body() updateBody: UpdateLetterDto) {
     return this.letterService.updateLetter(id, updateBody);
+  }
+
+  @Delete(':id')
+  deleteLetter(@Param('id') id: string) {
+    return this.letterService.deleteLetter(id);
   }
 }
